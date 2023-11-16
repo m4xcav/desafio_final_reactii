@@ -47,20 +47,35 @@ const Carrito = () => {
     actualizarTotal(nuevosDetalles);
   };
 
-  // Función para decrementar la cantidad de una pizza en el carrito
-  const decrementarCantidad = (pizzaId) => {
-    const nuevosDetalles = detallesCarrito.map((pizza) => {
-      if (pizza.id === pizzaId && pizza.cantidad > 1) {
-        const nuevaCantidad = pizza.cantidad - 1;
-        const nuevoPrecio = pizza.price * nuevaCantidad;
-        return { ...pizza, cantidad: nuevaCantidad, precio: nuevoPrecio };
-      }
-      return pizza;
-    });
+// Función para decrementar la cantidad de una pizza en el carrito
+const decrementarCantidad = (pizzaId) => {
+  const pizzaDetalle = detallesCarrito.find((pizza) => pizza.id === pizzaId);
 
-    setDetallesCarrito(nuevosDetalles);
-    actualizarTotal(nuevosDetalles);
-  };
+  if (pizzaDetalle) {
+    let confirmacion = true;
+
+    // Verificar si la cantidad es 1 para mostrar el cuadro de diálogo
+    if (pizzaDetalle.cantidad === 1) {
+      confirmacion = window.confirm(`¿Desea eliminar la pizza ${pizzaDetalle.name} de la lista?`);
+    }
+
+    if (confirmacion) {
+      const nuevosDetalles = detallesCarrito
+        .map((pizza) => {
+          if (pizza.id === pizzaId && pizza.cantidad > 1) {
+            const nuevaCantidad = pizza.cantidad - 1;
+            const nuevoPrecio = pizza.price * nuevaCantidad;
+            return { ...pizza, cantidad: nuevaCantidad, precio: nuevoPrecio };
+          }
+          return pizza;
+        })
+        .filter((pizza) => pizza.cantidad > 0);
+        
+      setDetallesCarrito((prevDetalles) => [...nuevosDetalles]);
+      actualizarTotal(nuevosDetalles);
+    }
+  }
+};
 
   // Función para actualizar el total global del context
   const actualizarTotal = (detalles) => {
