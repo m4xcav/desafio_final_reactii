@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { PizzaContext } from '../context/PizzaContext';
 
 const Pizza = () => {
+
   const { id } = useParams();
   const [pizzaDetalle, setPizzaDetalle] = useState(null);
   const URL = "/src/assets/api/pizzas.json";
@@ -26,6 +28,15 @@ const Pizza = () => {
   }
 
   const { name, desc, ingredients, price, img } = pizzaDetalle;
+  const { carrito, setCarrito, total, setTotal } = useContext(PizzaContext);
+
+  const agregarAlCarrito = (price, id) => {
+    const nuevoCarrito = [...carrito, id];
+    const nuevoTotal = total + price;
+    setCarrito(nuevoCarrito);
+    setTotal(nuevoTotal);
+  };
+
 
   return (
     <div className="container mx-auto min-h-fit mt-12 py-3 flex flex-wrap justify-center">
@@ -41,7 +52,7 @@ const Pizza = () => {
         </ul>
         <div className="flex justify-between">
           <p className="font-bold text-2xl"> Precio: {`$${price}`}</p>
-          <button className='btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full'>Añadir</button>
+         <button onClick={() => agregarAlCarrito(price, id)} className="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Añadir</button>
           <Link to="/" className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
           Regresar
           </Link>
