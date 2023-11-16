@@ -41,13 +41,11 @@ const Pizza = () => {
         </ul>
         <div className="flex justify-between">
           <p className="font-bold text-2xl"> Precio: {`$${price}`}</p>
-          <button>Carrito</button>
-        </div>
-      </div>
-      <div className="flex">
-      <Link to="/" className="mt-2 mx-auto">
+          <button className='btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full'>Añadir</button>
+          <Link to="/" className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
           Regresar
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );
