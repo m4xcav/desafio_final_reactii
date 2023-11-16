@@ -1,7 +1,7 @@
 .banner {
     background-image: linear-gradient(to left, #3d3c3c00, #000000bd), url("https://candepizza.com/img/slides/slide1.jpg");
     background-size: cover;
-    background-position:0rem -8rem;
+    background-repeat: no-repeat;
     padding: 0 2rem;
 }
 
