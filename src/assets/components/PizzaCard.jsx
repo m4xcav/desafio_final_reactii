@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 import { PizzaContext } from '../context/PizzaContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 const PizzaCard = (props) => {
   const { pizzas } = props;
@@ -33,9 +36,9 @@ const PizzaCard = (props) => {
               <p className="text-center text-2xl font-bold border-t-2 m-3">{`$ ${pizza.price}`}</p>
               <div className="flex justify-around card-body">
                 <Link to={`/Pizza/${pizza.id}`} className="card-link btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Ver mas
+                <FontAwesomeIcon icon={faPizzaSlice} style={{color: "#ea9534",}} />Ver mas
                 </Link>
-                <button onClick={() => agregarAlCarrito(pizza)} className="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Añadir</button>
+                <button onClick={() => agregarAlCarrito(pizza)} className="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"><FontAwesomeIcon icon={faCartShopping} style={{color: "#6b5252",}} /> Añadir</button>
               </div>
             </div>
           </div>
